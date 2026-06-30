@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "day one® Run",
+  title: "Brody Billings | Monument Solutions",
   description:
-    "day one® unites runners through community runs, performance apparel, and the belief that every day is day one.",
+    "Entrepreneur, investor, operator, and systems builder helping founder-led companies improve operations, capital discipline, and AI execution.",
 };
 
 export default function RootLayout({
