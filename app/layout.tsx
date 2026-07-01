@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Brody Billings | Monument Solutions",
   description:
-    "Entrepreneur, investor, operator, and systems builder helping founder-led companies improve operations, capital discipline, and AI execution.",
+    "Entrepreneur, investor, and systems builder helping founder-led companies improve operations, capital discipline, and AI execution.",
 };
 
 export default function RootLayout({

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { propertyListings } from "./property-listings";
 
 const brodyAsset = (name: string) => `/brody/assets/${name}`;
 
@@ -8,18 +9,18 @@ const buttonScribble =
   "M11.4537 22.3596C19.6545 18.1847 27.8552 14.0098 32.8344 11.6445C41.5581 7.50052 10.5956 39.1206 6.13386 45.1438C2.89568 49.5152 3.9942 49.3863 5.19398 49.025C6.39374 48.6638 7.66149 48.0741 16.6566 42.4134C25.6517 36.7528 42.3355 26.0392 51.4912 20.0762C60.6469 14.1132 61.7484 12.4942 62.1378 12.8874C62.5272 13.2807 62.0891 12.7872 55.478 21.125C48.8669 29.4627 36.0752 45.8928 29.3568 54.687C22.6384 63.4811 22.3809 64.1413 22.567 64.3494C22.8772 64.6964 42.6498 51.3989 42.9267 51.203C56.191 41.8144 67.6277 33.8285 81.2663 24.2328C94.9049 14.6371 97.8293 12.9711 99.9697 11.818C100.642 11.4558 105.373 8.65201 104.36 10.5163C103.993 11.1922 103.237 12.3518 94.5861 22.3596C85.935 32.3674 62.1378 61.3918 62.1378 61.3918C62.1378 61.3918 53.0608 71.5223 53.3949 72.0021C53.729 72.482 56.2351 70.9697 67.1706 62.6156C78.1062 54.2615 118.271 23.2751 121.489 24.184C124.707 25.093 95.9878 68.8273 94.5862 74.2402C93.1846 79.6531 124.396 46.4414 134.63 39.8584";
 
 const navLinks = [
-  { label: "About,", href: "#about" },
-  { label: "Method,", href: "#method" },
-  { label: "Ventures,", href: "#ventures" },
-  { label: "Properties,", href: "#properties" },
-  { label: "Contact", href: "#contact" },
+  { label: "About,", href: "/#about" },
+  { label: "Method,", href: "/#method" },
+  { label: "Ventures,", href: "/#ventures" },
+  { label: "Properties,", href: "/properties" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const stats = [
-  { value: "20+", label: "years operating" },
-  { value: "MBA", label: "business administration" },
+  { value: "20+", label: "years building" },
+  { value: "13", label: "businesses across the portfolio" },
   { value: "250", label: "employees before sale" },
-  { value: "$1.67M", label: "annual franchise revenue" },
+  { value: "UT", label: "Mapleton-based builder" },
 ];
 
 const focusAreas = [
@@ -168,31 +169,18 @@ const portfolioGroups = [
   },
 ];
 
-const propertyCards = [
-  {
-    title: "Commercial",
-    text: "Operating assets where structure, management, and financing can improve long-term value.",
-  },
-  {
-    title: "Residential",
-    text: "Opportunities evaluated through market fit, cash flow, buyer-seller alignment, and durability.",
-  },
-  {
-    title: "Seller Financing",
-    text: "Creative structures designed to help buyers and sellers reach practical financial outcomes.",
-  },
-];
-
 const testimonials = [
   {
     quote:
       "Brody is a rigorous businessman and a genuine, caring partner who builds lasting systems and value for his associates.",
     name: "Massimo Sahin",
+    image: "massimo.jpeg",
   },
   {
     quote:
       "Monument Solutions' structured alignment guided us through a seamless operational scaling transition.",
     name: "Trent Scott",
+    image: "trent.png",
   },
 ];
 
@@ -279,12 +267,20 @@ function TextLink({
   );
 }
 
+function BrodyLogo({ className = "" }: { className?: string }) {
+  return (
+    <img
+      alt="Brody Billings"
+      className={`brody-logo ${className}`}
+      src={brodyAsset("logo.png")}
+    />
+  );
+}
+
 function BrodyMark({ className = "" }: { className?: string }) {
   return (
     <span className={`brody-mark ${className}`} aria-hidden="true">
-      <span />
-      <span />
-      <span />
+      <img alt="" src={brodyAsset("logo.png")} />
     </span>
   );
 }
@@ -378,14 +374,6 @@ export default function Home() {
     };
   }, [menuOpen]);
 
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveGroup((current) => (current + 1) % portfolioGroups.length);
-    }, 5200);
-
-    return () => window.clearInterval(timer);
-  }, []);
-
   const currentGroup = useMemo(
     () => portfolioGroups[activeGroup],
     [activeGroup],
@@ -412,11 +400,7 @@ export default function Home() {
 
           <header className="site-nav" data-reveal>
             <a aria-label="Brody Billings home" className="site-nav__logo" href="#">
-              <BrodyMark />
-              <span>
-                Brody
-                <small>Billings</small>
-              </span>
+              <BrodyLogo />
             </a>
             <nav className="site-nav__links" aria-label="Main navigation">
               {navLinks.map((link) => (
@@ -437,8 +421,7 @@ export default function Home() {
 
           <div className={`mobile-menu ${menuOpen ? "is-open" : ""}`}>
             <div className="mobile-menu__brand">
-              <BrodyMark />
-              <span>Brody Billings</span>
+              <BrodyLogo />
             </div>
             <nav aria-label="Mobile navigation">
               {navLinks.map((link) => (
@@ -464,9 +447,8 @@ export default function Home() {
             <p className="mono">Monument Solutions / Mapleton, Utah</p>
             <h1 id="hero-title">Brody Billings</h1>
             <p>
-              Entrepreneur, investor, operator, and systems builder helping
-              founder-led companies find the constraint and build the system
-              around it.
+              Entrepreneur, investor, and systems builder helping founder-led
+              companies find the constraint and build the system around it.
             </p>
             <div className="hero__actions">
               <ActionButton href="mailto:brody@monument.solutions">
@@ -479,7 +461,7 @@ export default function Home() {
           </div>
 
           <div className="hero__signature" data-reveal>
-            <span className="script-note">Operator before advisor.</span>
+            <span className="script-note">Builder before advisor.</span>
             <p>
               I build, invest in, and improve businesses with operating
               discipline, capital clarity, and practical systems.
@@ -488,7 +470,7 @@ export default function Home() {
 
           <div className="hero__next-run" data-reveal>
             <div className="hero__next-main">
-              <span className="mono">Active operator</span>
+              <span className="mono">Active builder</span>
               <BrodyMark />
               <strong>Mapleton, UT</strong>
               <span>40.1305 N</span>
@@ -636,7 +618,8 @@ export default function Home() {
                       key={group.label}
                       type="button"
                       onClick={() => setActiveGroup(index)}
-                      onMouseEnter={() => setActiveGroup(index)}
+                      onFocus={() => setActiveGroup(index)}
+                      onPointerEnter={() => setActiveGroup(index)}
                     >
                       {group.label}
                     </button>
@@ -683,21 +666,32 @@ export default function Home() {
             </div>
 
             <div className="properties__grid">
-              {propertyCards.map((card) => (
-                <article className="property-card" data-reveal key={card.title}>
-                  <span className="mono">{card.title}</span>
-                  <p>{card.text}</p>
+              {propertyListings.slice(0, 3).map((property) => (
+                <article className="property-card" data-reveal key={property.title}>
+                  <span className="mono">{property.category}</span>
+                  <div>
+                    <h3>{property.title}</h3>
+                    <p>{property.summary}</p>
+                  </div>
+                  <small>
+                    {property.location} / {property.status}
+                  </small>
                 </article>
               ))}
             </div>
 
             <div className="properties__callout" data-reveal>
               <span className="script-note">Creative structure.</span>
-              <p>
-                I look for opportunities where better structure, clearer
-                operations, and flexible financing can help both sides reach a
-                practical outcome.
-              </p>
+              <div>
+                <p>
+                  I look for opportunities where better structure, clearer
+                  operations, and flexible financing can help both sides reach a
+                  practical outcome.
+                </p>
+                <ActionButton href="/properties" variant="outline">
+                  View all listings
+                </ActionButton>
+              </div>
             </div>
           </div>
         </section>
@@ -710,7 +704,7 @@ export default function Home() {
                 <span>What people say</span>
               </p>
               <h2>
-                A sharp operator with a people-first view of how businesses
+                A practical builder with a people-first view of how businesses
                 actually improve.
               </h2>
             </div>
@@ -718,8 +712,14 @@ export default function Home() {
             <div className="proof__grid">
               {testimonials.map((testimonial) => (
                 <blockquote className="testimonial-card" data-reveal key={testimonial.name}>
+                  <div className="testimonial-card__person">
+                    <img
+                      alt={testimonial.name}
+                      src={brodyAsset(testimonial.image)}
+                    />
+                    <cite>{testimonial.name}</cite>
+                  </div>
                   <p>&quot;{testimonial.quote}&quot;</p>
-                  <cite>{testimonial.name}</cite>
                 </blockquote>
               ))}
             </div>
@@ -734,7 +734,7 @@ export default function Home() {
                   <TextLink key={link.label} {...link} />
                 ))}
               </nav>
-              <BrodyMark />
+              <BrodyLogo />
               <a className="footer__contact-link" href="mailto:brody@monument.solutions">
                 brody@monument.solutions
               </a>
