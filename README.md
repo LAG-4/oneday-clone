@@ -329,14 +329,14 @@ Other scope expansions mentioned:
 ### Phase 2: Modular Content Architecture
 
 - [x] Current page uses local structured arrays for some content.
-- [ ] Move ventures/businesses into a dedicated structured data file.
-- [ ] Add complete venture fields: name, category, status, logo, description, website, images, CTA, tags, featured flag.
-- [ ] Support hiding ventures without deleting content.
-- [ ] Support reordering ventures without redesigning the page.
-- [ ] Support adding new ventures without editing layout code.
-- [ ] Decide whether content should live in JSON, CMS, database, GHL custom objects, or another source.
-- [ ] Build reusable section components.
-- [ ] Build reusable venture/card components.
+- [x] Move ventures/businesses into a dedicated structured data file.
+- [x] Add complete venture fields: name, category, status, logo, description, website, images, CTA, tags, featured flag.
+- [x] Support hiding ventures without deleting content.
+- [x] Support reordering ventures without redesigning the page.
+- [x] Support adding new ventures without editing layout code.
+- [x] Decide whether content should live in JSON, CMS, database, GHL custom objects, or another source.
+- [x] Build reusable section components.
+- [x] Build reusable venture/card components.
 
 ### Phase 3: GoHighLevel Funnel / CRM Integration
 

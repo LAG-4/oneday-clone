@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { VentureSection } from "./components/venture-section";
 import { propertyListings } from "./property-listings";
+import { ventureGroups } from "./data/ventures";
 
 const brodyAsset = (name: string) => `/brody/assets/${name}`;
 
@@ -89,83 +91,6 @@ const offers = [
     title: "Automation",
     shape: "flow",
     text: "Automate sales, marketing, customer service, and repetitive workflows so the team stays focused on revenue-producing work.",
-  },
-];
-
-const portfolioGroups = [
-  {
-    label: "Current Companies",
-    kicker: "Systems and consulting",
-    items: [
-      {
-        title: "Monument Solutions",
-        type: "Operational intelligence",
-        text: "An IT and marketing consulting firm focused on corporate infrastructure, technology adoption, cloud solutions, and AI-driven automation.",
-        href: "https://www.monument.solutions",
-      },
-      {
-        title: "MS AI Agents",
-        type: "AI workflows",
-        text: "Customizable AI agents for healthcare, hospitality, real estate, and office environments handling calls, intake, scheduling, and inquiries.",
-      },
-      {
-        title: "Capital Bookkeeping Solutions",
-        type: "Finance services",
-        text: "Virtual bookkeeping for small businesses, including payroll, reporting, cash flow forecasting, forensic accounting, and QuickBooks integration.",
-      },
-      {
-        title: "Arctic Peaks Water",
-        type: "Water technology",
-        text: "Part-ownership in a patented water-purification company serving residential, commercial, and industrial use cases.",
-      },
-    ],
-  },
-  {
-    label: "Investments",
-    kicker: "Capital and assets",
-    items: [
-      {
-        title: "Commercial and Residential Real Estate",
-        type: "Seller-financed properties",
-        text: "Identifying high-potential properties, managing real estate investments, and structuring creative financing solutions for long-term value.",
-      },
-      {
-        title: "Crypto Mining",
-        type: "Digital asset operations",
-        text: "A focus on automated mining technologies that improve efficiency, reduce operating costs, and support scalable systems.",
-      },
-    ],
-  },
-  {
-    label: "Operating Experience",
-    kicker: "Hands-on businesses",
-    items: [
-      {
-        title: "Gas Stations and Travel Plaza",
-        type: "Infrastructure",
-        text: "Family-owned operations grew into an eight-figure business with more than 250 employees and recurring commercial accounts before sale.",
-      },
-      {
-        title: "South Valley Packaging",
-        type: "Business development",
-        text: "Sales and client-relations work in co-packing, formulation, logistics, sports nutrition, and dietary supplement support.",
-      },
-      {
-        title: "Subway Franchisee",
-        type: "Food franchise",
-        text: "Owned and operated multiple locations, applying operating discipline, customer service, and systems management.",
-      },
-      {
-        title: "Arby's Franchisee",
-        type: "Food franchise",
-        text: "Led a quick-service franchise under a trusted national brand, supported by a live operations dashboard used daily.",
-      },
-      {
-        title: "DonutNV",
-        type: "Mobile dessert franchise",
-        text: "Built a mobile dessert business around quality, guest experience, event energy, and operational excellence.",
-      },
-    ],
   },
 ];
 
@@ -316,18 +241,23 @@ export default function Home() {
           }
         });
       },
-      { threshold: 0.16 },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.01 },
     );
 
-    revealElements.forEach((el) => {
-      const rect = el.getBoundingClientRect();
+    const showVisibleElements = () => {
+      revealElements.forEach((el) => {
+        if (el.classList.contains("is-visible")) return;
 
-      if (rect.top < window.innerHeight * 0.95 && rect.bottom > 0) {
-        el.classList.add("is-visible");
-      } else {
-        observer.observe(el);
-      }
-    });
+        const rect = el.getBoundingClientRect();
+
+        if (rect.top < window.innerHeight * 1.08 && rect.bottom > -80) {
+          el.classList.add("is-visible");
+          observer.unobserve(el);
+        } else {
+          observer.observe(el);
+        }
+      });
+    };
 
     const cursor = document.querySelector<HTMLElement>(".cursor-glow");
     let ticking = false;
@@ -356,13 +286,16 @@ export default function Home() {
 
     window.addEventListener("pointermove", handlePointer);
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", showVisibleElements);
     handleScroll();
+    showVisibleElements();
 
     return () => {
       observer.disconnect();
       document.body.classList.remove("reveal-ready");
       window.removeEventListener("pointermove", handlePointer);
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", showVisibleElements);
     };
   }, []);
 
@@ -374,8 +307,8 @@ export default function Home() {
     };
   }, [menuOpen]);
 
-  const currentGroup = useMemo(
-    () => portfolioGroups[activeGroup],
+  const selectedGroup = useMemo(
+    () => Math.min(activeGroup, Math.max(ventureGroups.length - 1, 0)),
     [activeGroup],
   );
 
@@ -488,38 +421,57 @@ export default function Home() {
               <span>A few words about me</span>
             </div>
 
-            <h2 className="x-title" data-reveal>
-              Entrepreneur.
-              <br />
-              Investor.
-              <br />
-              Systems builder.
-            </h2>
+            <div className="about__grid">
+              <div className="about__lead" data-reveal>
+                <h2>
+                  Entrepreneur.
+                  <br />
+                  Investor.
+                  <br />
+                  Systems builder.
+                </h2>
+                <p>
+                  I work with founder-led companies where operations, capital,
+                  technology, and leadership all have to move together.
+                </p>
+              </div>
 
-            <div className="about__copy-wrap">
-              <p className="section-copy" data-reveal>
-                I am an entrepreneur and investor from Mapleton, Utah, with
-                more than two decades of experience across import, distribution,
-                consulting, retail, restaurants, real estate, and technology.
-              </p>
-              <span className="script-note about__script" aria-hidden="true">
-                Build the system.
-              </span>
-            </div>
+              <aside className="about__note" data-reveal>
+                <span className="script-note">Build the system.</span>
+                <p>
+                  Based in Mapleton, Utah, I bring more than two decades of
+                  hands-on experience across import, distribution, consulting,
+                  retail, restaurants, real estate, and technology.
+                </p>
+                <ActionButton href="#method" variant="outline">
+                  See the method
+                </ActionButton>
+              </aside>
 
-            <div className="stats-grid">
-              {stats.map((stat) => (
-                <StatCard key={stat.label} {...stat} />
-              ))}
-            </div>
+              <div className="stats-grid">
+                {stats.map((stat) => (
+                  <StatCard key={stat.label} {...stat} />
+                ))}
+              </div>
 
-            <div className="focus-grid">
-              {focusAreas.map((area) => (
-                <article className="focus-card" data-reveal key={area.title}>
-                  <span className="mono">{area.title}</span>
-                  <p>{area.text}</p>
-                </article>
-              ))}
+              <div className="about__focus">
+                <div className="about__focus-heading" data-reveal>
+                  <span className="mono">Where I help</span>
+                  <p>
+                    The useful work is usually practical: make the numbers
+                    clearer, tighten execution, and put better systems around
+                    the team.
+                  </p>
+                </div>
+                <div className="focus-grid">
+                  {focusAreas.map((area) => (
+                    <article className="focus-card" data-reveal key={area.title}>
+                      <span className="mono">{area.title}</span>
+                      <p>{area.text}</p>
+                    </article>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -608,49 +560,16 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="portfolio__featured">
-              <div className="portfolio-panel" data-reveal>
-                <p className="mono">Explore</p>
-                <div className="portfolio-panel__headings">
-                  {portfolioGroups.map((group, index) => (
-                    <button
-                      className={index === activeGroup ? "is-active" : ""}
-                      key={group.label}
-                      type="button"
-                      onClick={() => setActiveGroup(index)}
-                      onFocus={() => setActiveGroup(index)}
-                      onPointerEnter={() => setActiveGroup(index)}
-                    >
-                      {group.label}
-                    </button>
-                  ))}
-                </div>
+            <VentureSection
+              activeGroup={selectedGroup}
+              groups={ventureGroups}
+              onSelectGroup={setActiveGroup}
+              action={
                 <ActionButton href="#contact">
                   Discuss a business
                 </ActionButton>
-              </div>
-
-              <div className="venture-list" data-reveal>
-                <div className="venture-list__header">
-                  <span className="mono">{currentGroup.kicker}</span>
-                  <h3>{currentGroup.label}</h3>
-                </div>
-                <div className="venture-list__items">
-                  {currentGroup.items.map((item) => (
-                    <article className="venture-card" key={item.title}>
-                      <span className="mono">{item.type}</span>
-                      <h4>{item.title}</h4>
-                      <p>{item.text}</p>
-                      {item.href ? (
-                        <a href={item.href} target="_blank" rel="noreferrer">
-                          Visit site
-                        </a>
-                      ) : null}
-                    </article>
-                  ))}
-                </div>
-              </div>
-            </div>
+              }
+            />
           </div>
         </section>
 
