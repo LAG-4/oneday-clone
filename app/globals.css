@@ -1435,6 +1435,7 @@ body:hover .cursor-glow {
 .venture-list {
   position: relative;
   overflow: hidden;
+  height: 43rem;
   min-height: 43rem;
   border: 1px solid var(--line);
   border-radius: var(--radius-feature);
@@ -1552,20 +1553,27 @@ body:hover .cursor-glow {
   display: grid;
   flex: 1;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-auto-rows: minmax(10.5rem, auto);
+  grid-auto-rows: minmax(15.5rem, max-content);
   gap: clamp(0.75rem, 1vw, 1rem);
   min-height: 0;
   margin-top: 1.25rem;
   padding: clamp(0.65rem, 1vw, 0.95rem);
+  overflow-y: auto;
+  scrollbar-width: none;
   border: 1px solid var(--line);
   border-radius: calc(var(--radius-feature) + 0.2rem);
   background: rgba(248, 242, 232, 0.04);
   box-shadow: inset 0 0 0 1px rgba(9, 9, 8, 0.32);
 }
 
+.venture-list__items::-webkit-scrollbar {
+  display: none;
+}
+
 .venture-card {
   min-height: 0;
   padding: 1.25rem;
+  overflow: hidden;
   border: 1px solid rgba(248, 242, 232, 0.1);
   border-radius: var(--radius-panel);
   background: var(--panel);
@@ -1588,14 +1596,14 @@ body:hover .cursor-glow {
 
 .venture-card h4 {
   max-width: 22rem;
-  margin-top: clamp(1.1rem, 2.2vw, 2.4rem);
+  margin-top: clamp(0.85rem, 1.35vw, 1.45rem);
   font-size: 1.85rem;
   line-height: 0.96;
   font-weight: 500;
 }
 
 .venture-card p {
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   color: rgba(248, 242, 232, 0.72);
   line-height: 1.18;
 }
@@ -2007,7 +2015,7 @@ body:hover .cursor-glow {
   overflow: hidden;
   padding: 1.25rem;
   border: 1px solid var(--line);
-  border-radius: var(--radius-panel) var(--radius-feature) var(--radius-feature) var(--radius-card);
+  border-radius: var(--radius-feature);
   background:
     radial-gradient(18rem 14rem at 85% 12%, rgba(82, 125, 135, 0.16), transparent 70%),
     radial-gradient(16rem 12rem at 18% 88%, rgba(173, 108, 70, 0.12), transparent 72%),
@@ -2250,6 +2258,7 @@ body:hover .cursor-glow {
   }
 
   .about__lead h2 {
+    margin-top: 1.25rem;
     font-size: clamp(4rem, 11vw, 7rem);
   }
 
@@ -2607,6 +2616,7 @@ body:hover .cursor-glow {
   }
 
   .about__lead h2 {
+    margin-top: 1.5rem;
     font-size: clamp(2.9rem, 11vw, 4.75rem);
     line-height: 0.92;
   }
