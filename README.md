@@ -52,8 +52,32 @@ for contacts, scoring, pipelines, booking, and automation.
 
 ## Editing the site from GHL
 
-Create these Custom Values in GHL (Settings → Custom Values), each holding a
-JSON document copied from (and shaped like) the matching local file:
+For day-to-day edits, use the plain `Website ...` Custom Values in GHL
+(Settings → Custom Values). These are normal text / yes-no / order fields
+such as `Website Hero Title`, `Website Primary CTA Label`,
+`Website Property Commercial Property Visible`, and
+`Website Testimonial 01 Quote`. The site reads those friendly fields first,
+so Brody does not need to edit JSON for normal content changes.
+
+Common field patterns:
+
+| Field pattern | What to edit |
+| --- | --- |
+| `Website Hero *`, `Website About *`, `Website Footer *` | Main page copy |
+| `Website Venture <name> Name/Description/Visible/Order` | Venture cards |
+| `Website Property <title> Title/Summary/Visible/Order` | Property cards |
+| `Website Testimonial 01 Quote/Name/Visible/Order` | Testimonials |
+| `Website Profile <name> Welcome/Subheadline/Visible` | Personalized pages |
+
+Use `yes` / `no` for `Visible`, numbers for `Order`, comma-separated text
+for list fields such as `Tags` or `Details`, and `none` for optional fields
+that should be blank. After saving a value in GHL, publish immediately with
+`POST /api/revalidate?secret=<REVALIDATE_SECRET>`; otherwise the site refreshes
+from GHL on the normal cache window.
+
+The raw JSON Custom Values still exist as a fallback/import-export layer.
+They should only be edited by a technical user. Each JSON value holds a
+document copied from (and shaped like) the matching local file:
 
 | GHL Custom Value name | Controls | Template file |
 | --- | --- | --- |
@@ -82,6 +106,10 @@ custom value is missing or invalid, so a bad edit can never blank the site.
       content and verified byte-for-byte. Editing them in GHL (Settings →
       Custom Values) changes the live site — proven end to end with a live
       edit + revalidate + page check.
+- [x] 308 plain website editor Custom Values seeded in GHL so non-technical
+      edits can happen through normal fields instead of raw JSON. The site
+      prefers these plain `Website ...` fields, with JSON/local content as
+      fallback.
 - [x] End-to-end lead test: contact created with correct tags
       (`audit-t1`, `fit-qualified`, `interested-in-audit`, …) and 17
       populated fields, then deleted.
