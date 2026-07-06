@@ -1,0 +1,199 @@
+{
+  "groups": [
+    {
+      "id": "current-companies",
+      "label": "Current Companies",
+      "kicker": "Systems and consulting",
+      "status": "active",
+      "order": 10,
+      "hidden": false,
+      "items": [
+        {
+          "id": "monument-solutions",
+          "name": "Monument Solutions",
+          "category": "Operational intelligence",
+          "status": "active",
+          "logo": null,
+          "description": "An IT and marketing consulting firm focused on corporate infrastructure, technology adoption, cloud solutions, and AI-driven automation.",
+          "website": "https://www.monument.solutions",
+          "images": [],
+          "cta": "Visit site",
+          "tags": ["IT consulting", "Cloud", "AI automation"],
+          "featured": true,
+          "hidden": false,
+          "order": 10
+        },
+        {
+          "id": "ms-ai-agents",
+          "name": "MS AI Agents",
+          "category": "AI workflows",
+          "status": "active",
+          "logo": null,
+          "description": "Customizable AI agents for healthcare, hospitality, real estate, and office environments handling calls, intake, scheduling, and inquiries.",
+          "website": null,
+          "images": [],
+          "cta": null,
+          "tags": ["AI agents", "Scheduling", "Intake"],
+          "featured": true,
+          "hidden": false,
+          "order": 20
+        },
+        {
+          "id": "capital-bookkeeping-solutions",
+          "name": "Capital Bookkeeping Solutions",
+          "category": "Finance services",
+          "status": "active",
+          "logo": null,
+          "description": "Virtual bookkeeping for small businesses, including payroll, reporting, cash flow forecasting, forensic accounting, and QuickBooks integration.",
+          "website": null,
+          "images": [],
+          "cta": null,
+          "tags": ["Bookkeeping", "Payroll", "Forecasting"],
+          "featured": false,
+          "hidden": false,
+          "order": 30
+        },
+        {
+          "id": "arctic-peaks-water",
+          "name": "Arctic Peaks Water",
+          "category": "Water technology",
+          "status": "active",
+          "logo": null,
+          "description": "Part-ownership in a patented water-purification company serving residential, commercial, and industrial use cases.",
+          "website": null,
+          "images": [],
+          "cta": null,
+          "tags": ["Water", "Patented technology", "Commercial"],
+          "featured": false,
+          "hidden": false,
+          "order": 40
+        }
+      ]
+    },
+    {
+      "id": "investments",
+      "label": "Investments",
+      "kicker": "Capital and assets",
+      "status": "active",
+      "order": 20,
+      "hidden": false,
+      "items": [
+        {
+          "id": "commercial-and-residential-real-estate",
+          "name": "Commercial and Residential Real Estate",
+          "category": "Seller-financed properties",
+          "status": "active",
+          "logo": null,
+          "description": "Identifying high-potential properties, managing real estate investments, and structuring creative financing solutions for long-term value.",
+          "website": null,
+          "images": [],
+          "cta": null,
+          "tags": ["Real estate", "Seller financing", "Investment"],
+          "featured": true,
+          "hidden": false,
+          "order": 10
+        },
+        {
+          "id": "crypto-mining",
+          "name": "Crypto Mining",
+          "category": "Digital asset operations",
+          "status": "active",
+          "logo": null,
+          "description": "A focus on automated mining technologies that improve efficiency, reduce operating costs, and support scalable systems.",
+          "website": null,
+          "images": [],
+          "cta": null,
+          "tags": ["Digital assets", "Automation", "Efficiency"],
+          "featured": false,
+          "hidden": false,
+          "order": 20
+        }
+      ]
+    },
+    {
+      "id": "operating-experience",
+      "label": "Operating Experience",
+      "kicker": "Hands-on businesses",
+      "status": "past",
+      "order": 30,
+      "hidden": false,
+      "items": [
+        {
+          "id": "gas-stations-and-travel-plaza",
+          "name": "Gas Stations and Travel Plaza",
+          "category": "Infrastructure",
+          "status": "past",
+          "logo": null,
+          "description": "Family-owned operations grew into an eight-figure business with more than 250 employees and recurring commercial accounts before sale.",
+          "website": null,
+          "images": [],
+          "cta": null,
+          "tags": ["Operations", "Infrastructure", "Team scale"],
+          "featured": true,
+          "hidden": false,
+          "order": 10
+        },
+        {
+          "id": "south-valley-packaging",
+          "name": "South Valley Packaging",
+          "category": "Business development",
+          "status": "past",
+          "logo": null,
+          "description": "Sales and client-relations work in co-packing, formulation, logistics, sports nutrition, and dietary supplement support.",
+          "website": null,
+          "images": [],
+          "cta": null,
+          "tags": ["Sales", "Logistics", "Supplements"],
+          "featured": false,
+          "hidden": false,
+          "order": 20
+        },
+        {
+          "id": "subway-franchisee",
+          "name": "Subway Franchisee",
+          "category": "Food franchise",
+          "status": "past",
+          "logo": null,
+          "description": "Owned and operated multiple locations, applying operating discipline, customer service, and systems management.",
+          "website": null,
+          "images": [],
+          "cta": null,
+          "tags": ["Franchise", "Retail", "Customer service"],
+          "featured": false,
+          "hidden": false,
+          "order": 30
+        },
+        {
+          "id": "arbys-franchisee",
+          "name": "Arby's Franchisee",
+          "category": "Food franchise",
+          "status": "past",
+          "logo": null,
+          "description": "Led a quick-service franchise under a trusted national brand, supported by a live operations dashboard used daily.",
+          "website": null,
+          "images": [],
+          "cta": null,
+          "tags": ["Franchise", "Dashboard", "Quick service"],
+          "featured": false,
+          "hidden": false,
+          "order": 40
+        },
+        {
+          "id": "donutnv",
+          "name": "DonutNV",
+          "category": "Mobile dessert franchise",
+          "status": "past",
+          "logo": null,
+          "description": "Built a mobile dessert business around quality, guest experience, event energy, and operational excellence.",
+          "website": null,
+          "images": [],
+          "cta": null,
+          "tags": ["Mobile franchise", "Events", "Guest experience"],
+          "featured": false,
+          "hidden": false,
+          "order": 50
+        }
+      ]
+    }
+  ]
+}
