@@ -8,6 +8,9 @@ for contacts, scoring, pipelines, booking, and automation.
 
 - **Hosting:** Vercel, free tier. Brody approved hosting outside GHL. The repo
   already auto-deploys to Vercel (`oneday-clone` + `brody-redesign` projects).
+- **Design:** Brody has approved the current design direction. No sign-off
+  blocker remains; content/asset refresh (real logo, colors, venture list,
+  property inventory) can still happen incrementally without re-approval.
 - **GHL:** account exists; connection pending (see "Connecting GHL" below).
 - **Priority deliverable:** the Qualification Engine per Massimo's Spec v1
   (survey → complexity score → tier → pipeline → booking + deposit).
@@ -109,8 +112,8 @@ Useful tags the site sends: `website-lead`, `lead-qualification` /
 
 ## Still open (later phases)
 
-- **Design sign-off from Brody** — likes/dislikes on the deployed preview;
-  final logo, colors, venture list, property inventory, copy.
+- **Real content pass** — final logo, colors, venture list, property
+  inventory, copy (design direction itself is already approved).
 - **Domain:** point brodybillings.com (or chosen domain) at Vercel.
 - **Recognition phase two:** magic links, confidence tiers, verified portal
   mode (no private content below verified confidence — rule already scoped).
@@ -124,11 +127,10 @@ Useful tags the site sends: `website-lead`, `lead-qualification` /
 
 ## Decisions needed from Brody
 
-1. Design sign-off on the deployed preview.
-2. Deposit amounts per tier; confirm tier pricing reads right.
-3. Human confirm on all tiers at launch (recommended) or auto-send T1/T2.
-4. Which ventures/properties are public; what stays private.
-5. Production domain.
+1. Deposit amounts per tier; confirm tier pricing reads right.
+2. Human confirm on all tiers at launch (recommended) or auto-send T1/T2.
+3. Which ventures/properties are public; what stays private.
+4. Production domain.
 
 ## Development
 
