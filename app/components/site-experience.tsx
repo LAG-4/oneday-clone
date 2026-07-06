@@ -424,21 +424,30 @@ export function SiteExperience({
               </div>
 
               <div className="proof__grid">
-                {testimonials.map((testimonial) => (
-                  <blockquote
-                    className="testimonial-card"
-                    data-reveal
-                    key={testimonial.id}
-                  >
-                    <div className="testimonial-card__person">
+                {testimonials.map((testimonial, index) => (
+                  <figure className="testimonial-card" data-reveal key={testimonial.id}>
+                    <div className="testimonial-card__top">
+                      <span className="mono">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span className="mono">In their words</span>
+                    </div>
+                    <blockquote>
+                      <p>&quot;{testimonial.quote}&quot;</p>
+                    </blockquote>
+                    <figcaption className="testimonial-card__person">
                       <img
                         alt={testimonial.name}
                         src={brodyAsset(testimonial.image)}
                       />
-                      <cite>{testimonial.name}</cite>
-                    </div>
-                    <p>&quot;{testimonial.quote}&quot;</p>
-                  </blockquote>
+                      <span className="testimonial-card__person-meta">
+                        <cite>{testimonial.name}</cite>
+                        <span className="script-note" aria-hidden="true">
+                          {testimonial.name.split(" ")[0]}
+                        </span>
+                      </span>
+                    </figcaption>
+                  </figure>
                 ))}
               </div>
             </div>

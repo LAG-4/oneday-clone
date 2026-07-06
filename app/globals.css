@@ -31,11 +31,11 @@
   --mineral: #527d87;
   --sage: #6f806b;
   --gutter: clamp(1.5rem, 3vw, 3.75rem);
-  --radius-tight: 0.55rem;
-  --radius-control: 1.65rem;
-  --radius-panel: 1.15rem;
-  --radius-card: 1.35rem;
-  --radius-feature: 1.8rem;
+  --radius-tight: 0.125rem;
+  --radius-control: 0.125rem;
+  --radius-panel: 0.185rem;
+  --radius-card: 0.185rem;
+  --radius-feature: 0.25rem;
   --hero-parallax: 0px;
   --portrait-parallax: 0px;
 }
@@ -870,7 +870,7 @@ body:hover .cursor-glow {
   gap: clamp(0.75rem, 1.15vw, 1.15rem);
   padding: clamp(0.65rem, 1vw, 0.95rem);
   border: 1px solid var(--line);
-  border-radius: calc(var(--radius-feature) + 0.35rem);
+  border-radius: var(--radius-feature);
   background: rgba(248, 242, 232, 0.045);
   box-shadow: inset 0 0 0 1px rgba(9, 9, 8, 0.34);
 }
@@ -945,7 +945,7 @@ body:hover .cursor-glow {
   gap: clamp(0.75rem, 1vw, 1rem);
   padding: clamp(0.65rem, 1vw, 0.95rem);
   border: 1px solid var(--line);
-  border-radius: calc(var(--radius-feature) + 0.25rem);
+  border-radius: var(--radius-feature);
   background: rgba(248, 242, 232, 0.04);
   box-shadow: inset 0 0 0 1px rgba(9, 9, 8, 0.32);
 }
@@ -1561,7 +1561,7 @@ body:hover .cursor-glow {
   overflow-y: auto;
   scrollbar-width: none;
   border: 1px solid var(--line);
-  border-radius: calc(var(--radius-feature) + 0.2rem);
+  border-radius: var(--radius-feature);
   background: rgba(248, 242, 232, 0.04);
   box-shadow: inset 0 0 0 1px rgba(9, 9, 8, 0.32);
 }
@@ -1955,7 +1955,7 @@ body:hover .cursor-glow {
 .listing-card li {
   padding: 0.34rem 0.55rem;
   border: 1px solid rgba(248, 242, 232, 0.14);
-  border-radius: 999px;
+  border-radius: var(--radius-tight);
   color: rgba(248, 242, 232, 0.72);
   font-size: 0.85rem;
 }
@@ -2007,59 +2007,80 @@ body:hover .cursor-glow {
 }
 
 .testimonial-card {
-  position: relative;
-  display: grid;
-  min-height: 24rem;
-  grid-template-rows: auto 1fr;
-  gap: 2.5rem;
-  overflow: hidden;
-  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin: 0;
+  padding: 1.6rem 1.6rem 1.4rem;
   border: 1px solid var(--line);
-  border-radius: var(--radius-feature);
-  background:
-    radial-gradient(18rem 14rem at 85% 12%, rgba(82, 125, 135, 0.16), transparent 70%),
-    radial-gradient(16rem 12rem at 18% 88%, rgba(173, 108, 70, 0.12), transparent 72%),
-    var(--panel);
+  border-radius: var(--radius-tight);
+  background: var(--panel);
+  transition: border-color 0.25s ease;
 }
 
-.testimonial-card::before {
-  content: "";
-  position: absolute;
-  inset: 5.25rem 1.25rem auto;
-  height: 1px;
-  background: linear-gradient(90deg, rgba(173, 108, 70, 0.55), transparent);
+.testimonial-card:hover {
+  border-color: var(--line-strong);
+}
+
+.testimonial-card__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.testimonial-card__top .mono:last-child {
+  color: var(--dune);
+}
+
+.testimonial-card blockquote {
+  flex: 1;
+  margin: 0;
+}
+
+.testimonial-card blockquote p {
+  margin: 0;
+  max-width: 34rem;
+  color: rgba(248, 242, 232, 0.92);
+  font-size: clamp(1.2rem, 1.75vw, 1.55rem);
+  line-height: 1.45;
+  font-variation-settings: "wght" 480;
 }
 
 .testimonial-card__person {
-  position: relative;
-  z-index: 1;
   display: flex;
   align-items: center;
   gap: 1rem;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--line);
 }
 
 .testimonial-card__person img {
-  width: 4.2rem;
-  height: 4.2rem;
+  width: 3.2rem;
+  height: 3.2rem;
   border: 1px solid rgba(248, 242, 232, 0.22);
-  border-radius: 50%;
+  border-radius: var(--radius-tight);
   object-fit: cover;
   object-position: center top;
+}
+
+.testimonial-card__person-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
 }
 
 .testimonial-card__person cite {
   color: var(--sand);
   font-style: normal;
+  font-variation-settings: "wght" 600;
 }
 
-.testimonial-card p {
-  position: relative;
-  z-index: 1;
-  align-self: end;
-  max-width: 48rem;
-  color: rgba(248, 242, 232, 0.88);
-  font-size: clamp(1.7rem, 2.8vw, 3.35rem);
-  line-height: 1;
+.testimonial-card__person .script-note {
+  font-size: 1.05rem;
+  color: var(--copper);
 }
 
 .footer {
@@ -2716,10 +2737,6 @@ body:hover .cursor-glow {
     font-size: clamp(1.7rem, 6vw, 2.4rem);
   }
 
-  .testimonial-card p {
-    font-size: clamp(1.4rem, 6vw, 2.2rem);
-  }
-
   .footer__cta h2 {
     font-size: clamp(2.4rem, 10.5vw, 3.6rem);
   }
@@ -2803,8 +2820,7 @@ body:hover .cursor-glow {
     min-height: 30rem;
   }
 
-  .property-card,
-  .testimonial-card {
+  .property-card {
     min-height: 18rem;
   }
 
@@ -2906,7 +2922,7 @@ body:hover .cursor-glow {
   width: 2.4rem;
   height: 2.4rem;
   border: 1px solid var(--line);
-  border-radius: 50%;
+  border-radius: var(--radius-tight);
   background: transparent;
   color: var(--ink);
   font-size: 1.3rem;
@@ -2942,7 +2958,7 @@ body:hover .cursor-glow {
 .qualify-progress__dot {
   height: 0.3rem;
   flex: 1;
-  border-radius: 999px;
+  border-radius: 0;
   background: var(--line);
   transition: background 0.3s ease;
 }

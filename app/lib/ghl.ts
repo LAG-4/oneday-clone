@@ -109,6 +109,49 @@ export async function upsertContact(
   }
 }
 
+/**
+ * Create an opportunity in the Audit Pipeline (optional — requires
+ * GHL_PIPELINE_ID and GHL_PIPELINE_STAGE_ID). Lets the site drop qualified
+ * leads straight into the pipeline so no GHL workflow step is needed for it.
+ */
+export async function createOpportunity(input: {
+  contactId: string;
+  name: string;
+  monetaryValue: number;
+}): Promise<{ ok: boolean; error?: string }> {
+  const pipelineId = process.env.GHL_PIPELINE_ID;
+  const pipelineStageId = process.env.GHL_PIPELINE_STAGE_ID;
+  if (!ghlConfigured() || !pipelineId || !pipelineStageId) {
+    return { ok: false, error: "pipeline not configured" };
+  }
+
+  try {
+    const res = await fetch(`${GHL_BASE}/opportunities/`, {
+      method: "POST",
+      headers: ghlHeaders(),
+      body: JSON.stringify({
+        locationId: process.env.GHL_LOCATION_ID,
+        pipelineId,
+        pipelineStageId,
+        contactId: input.contactId,
+        name: input.name,
+        monetaryValue: input.monetaryValue,
+        status: "open",
+      }),
+    });
+    if (!res.ok) {
+      const body = (await res.json().catch(() => ({}))) as { message?: string | string[] };
+      const message = Array.isArray(body.message)
+        ? body.message.join("; ")
+        : (body.message ?? `HTTP ${res.status}`);
+      return { ok: false, error: message };
+    }
+    return { ok: true };
+  } catch (error) {
+    return { ok: false, error: String(error) };
+  }
+}
+
 /** Mirror the raw lead payload to a GHL inbound-webhook workflow trigger. */
 export async function forwardToWebhook(payload: unknown): Promise<{
   ok: boolean;

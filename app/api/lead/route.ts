@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import {
+  createOpportunity,
   forwardToWebhook,
   ghlConfigured,
   upsertContact,
@@ -95,6 +96,21 @@ export async function POST(request: NextRequest) {
   if (body.type === "property" && body.property) {
     tags.add("property-inquiry");
     tags.add(`property-${clean(body.property.id) || "unknown"}`);
+    customFields.push({
+      key: "ms_property_interest",
+      field_value: clean(body.property.title),
+    });
+  }
+
+  if (role) customFields.push({ key: "ms_role_title", field_value: role });
+  if (clean(body.message)) {
+    customFields.push({ key: "ms_message", field_value: clean(body.message) });
+  }
+  if (clean(body.context?.visitorId)) {
+    customFields.push({
+      key: "ms_visitor_id",
+      field_value: clean(body.context?.visitorId),
+    });
   }
 
   if (profile) tags.add(`profile-${profile}`);
@@ -153,6 +169,20 @@ export async function POST(request: NextRequest) {
     console.warn("Lead received but GHL is not connected:", JSON.stringify(webhookPayload));
   } else if (!api.ok && ghlConfigured()) {
     console.error("GHL contact upsert failed:", api.error);
+  }
+
+  // Qualified audit applications go straight into the Audit Pipeline when
+  // the pipeline env vars are set; T3 stays at 0 (custom-scoped pricing).
+  if (api.ok && api.contactId && result && result.fit === "qualified") {
+    const tierValue = result.tier === "T1" ? 3000 : result.tier === "T2" ? 5000 : 0;
+    const opportunity = await createOpportunity({
+      contactId: api.contactId,
+      name: `Audit — ${company || firstName || email || "Website lead"} (${result.tier})`,
+      monetaryValue: tierValue,
+    });
+    if (!opportunity.ok && opportunity.error !== "pipeline not configured") {
+      console.error("GHL opportunity creation failed:", opportunity.error);
+    }
   }
 
   return NextResponse.json({
