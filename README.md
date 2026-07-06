@@ -11,7 +11,10 @@ for contacts, scoring, pipelines, booking, and automation.
 - **Design:** Brody has approved the current design direction. No sign-off
   blocker remains; content/asset refresh (real logo, colors, venture list,
   property inventory) can still happen incrementally without re-approval.
-- **GHL:** account exists; connection pending (see "Connecting GHL" below).
+- **GHL:** connected. Custom fields + content custom values created via API;
+  leads verified flowing in. Remaining manual setup listed below.
+- **UI:** boxy aesthetic (sharp corners) per client feedback; testimonials
+  redesigned as bordered editorial cards.
 - **Priority deliverable:** the Qualification Engine per Massimo's Spec v1
   (survey → complexity score → tier → pipeline → booking + deposit).
 - **All site content is data**, editable from GHL Custom Values without a
@@ -63,47 +66,53 @@ JSON document copied from (and shaped like) the matching local file:
 Name matching ignores case/punctuation. Local JSON is the fallback whenever a
 custom value is missing or invalid, so a bad edit can never blank the site.
 
-## Connecting GHL (the remaining setup)
+## GHL connection status (done via API, Jul 6, 2026)
 
-Environment variables (see `.env.example`; set them in Vercel → Project →
-Settings → Environment Variables):
-
-1. `GHL_API_TOKEN` — Private Integration token (Settings → Private
-   Integrations) with scopes: contacts write/read, custom values read.
-2. `GHL_LOCATION_ID` — the sub-account location id.
-3. `GHL_WEBHOOK_URL` — optional: a workflow with an Inbound Webhook trigger;
-   receives every lead payload in full.
-4. `NEXT_PUBLIC_GHL_SURVEY_URL` — optional: GHL-hosted survey embed URL.
-5. `REVALIDATE_SECRET` — any random string, for instant content publishes.
-
-Inside the GHL app (per Spec v1):
-
-- [ ] Contact custom fields, `MS_` namespace (avoids the "name already used"
-      collision). Create with these exact names so the API keys match:
-      `MS Functional Scope`, `MS Locations`, `MS Annual Revenue`,
-      `MS Employee Range`, `MS Industry`, `MS System Fragmentation`,
-      `MS Decision Complexity`, `MS Buying Timeline`, `MS Audit Goal`,
-      `MS Audit Acknowledgement`, `MS Complexity Score`, `MS Estimated Tier`,
-      `MS Fit Status` (keys: `ms_functional_scope`, `ms_locations`,
+- [x] Private Integration token + location id wired into Vercel (production
+      and preview) and `.env.local`.
+- [x] 22 contact custom fields created (all `MS *` + `UTM *`), keys verified
+      to match what `/api/lead` sends: `ms_functional_scope`, `ms_locations`,
       `ms_annual_revenue`, `ms_employee_range`, `ms_industry`,
       `ms_system_fragmentation`, `ms_decision_complexity`,
       `ms_buying_timeline`, `ms_audit_goal`, `ms_audit_acknowledgement`,
-      `ms_complexity_score`, `ms_estimated_tier`, `ms_fit_status`).
-- [ ] "Audit Pipeline": New Application → Qualified–Needs Review → Booking
-      Sent → Audit Booked (Deposit Paid) → Audit Delivered → Implementation
-      Proposal → Won. Lost/Disqualified as status; Nurture via tag.
-- [ ] Master workflow on contact tag `interested-in-audit`: branch on
-      `ms_fit_status` (declined → decline sequence; nurture → drip) and
-      `ms_estimated_tier` → create Opportunity with tier value → notify Brody
-      with a confirm task → send booking link on confirm (v1 = human confirm
-      on all tiers). The site already computes score/tier/fit — no GHL survey
-      or Math Operation needed.
-- [ ] Booking calendars per tier with deposit via partial payment.
+      `ms_complexity_score`, `ms_estimated_tier`, `ms_fit_status`,
+      `ms_role_title`, `ms_property_interest`, `ms_message`, `ms_visitor_id`,
+      `utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`.
+- [x] All five `Website * JSON` custom values seeded with the current site
+      content and verified byte-for-byte. Editing them in GHL (Settings →
+      Custom Values) changes the live site — proven end to end with a live
+      edit + revalidate + page check.
+- [x] End-to-end lead test: contact created with correct tags
+      (`audit-t1`, `fit-qualified`, `interested-in-audit`, …) and 17
+      populated fields, then deleted.
+
+## Remaining GHL setup (manual, in the GHL app)
+
+These cannot be created by API — do them in the GHL UI (step-by-step):
+
+- [ ] **Audit Pipeline** (Opportunities → Pipelines → Create): stages
+      New Application → Qualified–Needs Review → Booking Sent → Audit Booked
+      (Deposit Paid) → Audit Delivered → Implementation Proposal → Won.
+      Then copy the pipeline id + first-stage id into `GHL_PIPELINE_ID` /
+      `GHL_PIPELINE_STAGE_ID` (Vercel env) — the site then creates
+      Opportunities itself (T1 $3,000 / T2 $5,000 / T3 custom) for qualified
+      leads; no workflow step needed for it.
+- [ ] **Property Pipeline** (optional but recommended): New Inquiry →
+      Details Sent → Negotiation → Under Contract → Closed, fed by a small
+      workflow on tag `property-inquiry`.
+- [ ] **Notification workflow** (Automation → Workflows → Create, trigger:
+      Contact Tag Added = `interested-in-audit`): If/Else on `MS Fit Status`
+      → qualified: internal notification + task "Confirm tier for {{contact.name}}
+      (score {{contact.ms_complexity_score}}, {{contact.ms_estimated_tier}})";
+      nurture: add to nurture drip; declined: send one gracious email.
+- [ ] **Booking calendars** per tier (Calendars → Create) with deposit via
+      Forms & Payments → Accept Payments → partial payment.
       **Blocked on Brody: deposit amounts.**
-- [ ] Follow-up sequences: booking-sent nudges, booked confirmations +
-      reminders, no-show rebook, nurture drip, gracious decline, post-audit.
-- [ ] End-to-end test: submit the site survey with test data, confirm
-      contact, fields, tags, opportunity, and notification all appear.
+- [ ] **Follow-up sequences**: booking-sent nudges, booked confirmation +
+      reminders, no-show rebook, nurture drip, post-audit proposal cadence.
+- [ ] Optional env additions later: `GHL_WEBHOOK_URL` (mirror every lead into
+      a workflow), `NEXT_PUBLIC_GHL_SURVEY_URL` (swap native survey for a
+      GHL-hosted one).
 
 Useful tags the site sends: `website-lead`, `lead-qualification` /
 `lead-property` / `lead-contact`, `interested-in-audit`, `audit-t1|t2|t3`,
