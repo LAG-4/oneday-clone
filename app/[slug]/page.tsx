@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { SiteExperience } from "../components/site-experience";
 import { applyProfile, getProfile, getProfiles, getSiteContent } from "../lib/content";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 type Params = { params: Promise<{ slug: string }> };
 

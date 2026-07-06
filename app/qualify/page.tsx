@@ -3,7 +3,7 @@ import Link from "next/link";
 import { QualificationForm } from "../components/qualification-form";
 import { getSiteContent } from "../lib/content";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "See if Your Business Qualifies | Brody Billings",

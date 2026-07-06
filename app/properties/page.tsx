@@ -3,7 +3,7 @@ import Link from "next/link";
 import { PropertiesExplorer } from "../components/properties-explorer";
 import { getProperties, getSiteContent } from "../lib/content";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Properties | Brody Billings",

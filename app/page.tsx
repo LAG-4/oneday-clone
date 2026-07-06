@@ -1,7 +1,7 @@
 import { SiteExperience } from "./components/site-experience";
 import { getSiteContent } from "./lib/content";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const content = await getSiteContent();

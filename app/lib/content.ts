@@ -29,9 +29,8 @@ import type {
  *   Website Profiles JSON      → app/data/profiles.json
  *
  * Name matching ignores case and punctuation, so "website_ventures_json"
- * works too. Content is cached for 5 minutes; POST /api/revalidate with the
- * REVALIDATE_SECRET busts it immediately (wire that into a GHL workflow to
- * get instant publishes).
+ * works too. Content pages fetch GHL fresh on each request so saved edits
+ * appear on the next page refresh.
  */
 
 const CUSTOM_VALUE_KEYS = {

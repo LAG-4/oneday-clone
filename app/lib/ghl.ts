@@ -23,10 +23,7 @@ const ghlHeaders = () => ({
 
 export type GhlCustomValue = { id: string; name: string; value: string };
 
-/**
- * Location custom values, cached and tagged so `/api/revalidate` (or a GHL
- * workflow webhook) can bust the cache after edits inside GHL.
- */
+/** Location custom values, fetched fresh so GHL edits appear on refresh. */
 export async function fetchCustomValues(): Promise<GhlCustomValue[]> {
   if (!ghlConfigured()) return [];
 
@@ -35,7 +32,7 @@ export async function fetchCustomValues(): Promise<GhlCustomValue[]> {
       `${GHL_BASE}/locations/${process.env.GHL_LOCATION_ID}/customValues`,
       {
         headers: ghlHeaders(),
-        next: { revalidate: 300, tags: ["ghl-content"] },
+        cache: "no-store",
       },
     );
 

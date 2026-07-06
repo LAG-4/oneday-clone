@@ -46,9 +46,9 @@ for contacts, scoring, pipelines, booking, and automation.
   cookie. All of it rides along on every lead.
 - **Property inquiries.** Each listing on `/properties` has "Ask about this
   property" → inquiry form → GHL with property tags.
-- **Cache + publish.** GHL content is cached 5 minutes;
-  `POST /api/revalidate?secret=<REVALIDATE_SECRET>` publishes instantly
-  (wire it to a GHL workflow button/webhook).
+- **Live GHL content.** Website content pages fetch GHL Custom Values on each
+  request, so saved edits appear on the next browser refresh without a manual
+  revalidate step.
 
 ## Editing the site from GHL
 
@@ -71,9 +71,8 @@ Common field patterns:
 
 Use `yes` / `no` for `Visible`, numbers for `Order`, comma-separated text
 for list fields such as `Tags` or `Details`, and `none` for optional fields
-that should be blank. After saving a value in GHL, publish immediately with
-`POST /api/revalidate?secret=<REVALIDATE_SECRET>`; otherwise the site refreshes
-from GHL on the normal cache window.
+that should be blank. After saving a value in GHL, refresh the site page; the
+next request reads GHL directly.
 
 The raw JSON Custom Values still exist as a fallback/import-export layer.
 They should only be edited by a technical user. Each JSON value holds a
@@ -181,5 +180,4 @@ npm run lint
 
 Note: this repo uses a newer Next.js (16.x) with breaking changes — read
 `node_modules/next/dist/docs/` before writing framework-touching code
-(see AGENTS.md). Middleware is `proxy.ts`, `params` are Promises,
-`revalidateTag` takes a cache profile argument.
+(see AGENTS.md). Middleware is `proxy.ts`, and `params` are Promises.
