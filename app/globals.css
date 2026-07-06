@@ -1914,33 +1914,56 @@ body:hover .cursor-glow {
 }
 
 .listing-card dl {
-  display: grid;
-  gap: 1px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.78rem 1.05rem;
   margin: 0;
-  border-radius: var(--radius-tight);
-  overflow: hidden;
-  background: var(--line);
+  padding-block: 0.85rem;
+  border-block: 1px solid rgba(248, 242, 232, 0.14);
+  background: linear-gradient(
+    90deg,
+    rgba(248, 242, 232, 0.035),
+    transparent 34%,
+    transparent 66%,
+    rgba(82, 125, 135, 0.045)
+  );
 }
 
 .listing-card dl div {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-block: 0.52rem;
-  background: var(--panel);
+  display: grid;
+  align-content: start;
+  gap: 0.38rem;
+  width: max-content;
+  max-width: 100%;
+  min-width: 0;
+  padding-right: 1.05rem;
+  border-right: 1px solid rgba(248, 242, 232, 0.11);
+}
+
+.listing-card dl div:last-child {
+  padding-right: 0;
+  border-right: 0;
 }
 
 .listing-card dt,
 .listing-card dd {
   margin: 0;
-  color: rgba(248, 242, 232, 0.74);
-  font-size: 0.88rem;
+  min-width: 0;
 }
 
 .listing-card dt {
-  color: var(--muted);
+  color: rgba(248, 242, 232, 0.48);
   font-family: "Font Mono", Menlo, Consolas, monospace;
+  font-size: 0.64rem;
+  line-height: 1;
   text-transform: uppercase;
+}
+
+.listing-card dd {
+  color: rgba(248, 242, 232, 0.84);
+  font-size: 0.98rem;
+  line-height: 1.08;
+  overflow-wrap: anywhere;
 }
 
 .listing-card ul {
@@ -2523,7 +2546,6 @@ body:hover .cursor-glow {
     font-size: clamp(2.1rem, 10vw, 3rem);
   }
 
-  .listing-card dl div,
   .listing-card__top {
     flex-wrap: wrap;
   }
@@ -2711,6 +2733,34 @@ body:hover .cursor-glow {
 
   .offer-card h3 {
     font-size: clamp(2.4rem, 11vw, 3.6rem);
+  }
+
+  .listing-card dl {
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-block: 0.2rem;
+    background: transparent;
+  }
+
+  .listing-card dl div {
+    grid-template-columns: minmax(5.5rem, auto) minmax(0, 1fr);
+    align-items: baseline;
+    gap: 1rem;
+    width: auto;
+    max-width: none;
+    padding: 0.72rem 0;
+    border-top: 1px solid rgba(248, 242, 232, 0.12);
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .listing-card dl div:first-child {
+    border-top: 0;
+  }
+
+  .listing-card dd {
+    justify-self: end;
+    text-align: right;
   }
 
   .portfolio__header h2 {
