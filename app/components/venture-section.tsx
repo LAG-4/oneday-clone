@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { VentureGroup } from "../data/ventures";
+import type { VentureGroup } from "../lib/content-types";
 import { VentureCard } from "./venture-card";
 
 type VentureSectionProps = {

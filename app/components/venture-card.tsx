@@ -1,4 +1,4 @@
-import type { Venture } from "../data/ventures";
+import type { Venture } from "../lib/content-types";
 
 export function VentureCard({ venture }: { venture: Venture }) {
   return (

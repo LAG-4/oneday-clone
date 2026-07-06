@@ -1,0 +1,82 @@
+{
+  "properties": [
+    {
+      "id": "commercial-property",
+      "title": "Commercial Property",
+      "category": "Commercial",
+      "status": "Details by request",
+      "location": "Utah",
+      "price": "By request",
+      "summary": "A commercial asset to evaluate through operating use, tenant quality, cash flow, and long-term value.",
+      "details": ["Commercial use", "Operating-value review", "Inquiry packet"],
+      "images": [],
+      "hidden": false,
+      "order": 10
+    },
+    {
+      "id": "residential-property",
+      "title": "Residential Property",
+      "category": "Residential",
+      "status": "Details by request",
+      "location": "Utah",
+      "price": "By request",
+      "summary": "A residential opportunity to review through market fit, buyer demand, financing structure, and durability.",
+      "details": ["Residential use", "Market-fit review", "Photos and address"],
+      "images": [],
+      "hidden": false,
+      "order": 20
+    },
+    {
+      "id": "seller-financed-opportunity",
+      "title": "Seller-Financed Opportunity",
+      "category": "Seller Financing",
+      "status": "Details by request",
+      "location": "Utah",
+      "price": "By request",
+      "summary": "A property or deal structure where flexible terms may help the buyer and seller reach a practical outcome.",
+      "details": ["Flexible terms", "Buyer-seller alignment", "Structure details"],
+      "images": [],
+      "hidden": false,
+      "order": 30
+    },
+    {
+      "id": "family-property-package",
+      "title": "Family Property Package",
+      "category": "Portfolio",
+      "status": "Inventory by request",
+      "location": "Utah",
+      "price": "By request",
+      "summary": "A grouped view for multiple family properties that may be sold individually or reviewed as a package.",
+      "details": ["Multiple properties", "Package view", "Family inventory"],
+      "images": [],
+      "hidden": false,
+      "order": 40
+    },
+    {
+      "id": "investment-property",
+      "title": "Investment Property",
+      "category": "Investment",
+      "status": "Details by request",
+      "location": "Utah",
+      "price": "By request",
+      "summary": "A real-estate investment opportunity to assess through downside protection, cash flow, and exit optionality.",
+      "details": ["Investment review", "Cash-flow analysis", "Financials"],
+      "images": [],
+      "hidden": false,
+      "order": 50
+    },
+    {
+      "id": "development-land-opportunity",
+      "title": "Development or Land Opportunity",
+      "category": "Land / Development",
+      "status": "Details by request",
+      "location": "Utah",
+      "price": "By request",
+      "summary": "A land or development-style opportunity where zoning, access, utilities, and timing drive the decision.",
+      "details": ["Land/development", "Zoning review", "Parcel details"],
+      "images": [],
+      "hidden": false,
+      "order": 60
+    }
+  ]
+}

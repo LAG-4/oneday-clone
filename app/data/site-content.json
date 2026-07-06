@@ -1,0 +1,129 @@
+{
+  "settings": {
+    "siteName": "Brody Billings",
+    "contactEmail": "brody@monument.solutions",
+    "monumentUrl": "https://www.monument.solutions",
+    "primaryCtaLabel": "See if Your Business Qualifies",
+    "confirmationMessage": "Thanks — we're reviewing your operation and will follow up within one business day to confirm whether an audit is the right next step."
+  },
+  "copy": {
+    "nav": [
+      { "label": "About,", "href": "/#about" },
+      { "label": "Method,", "href": "/#method" },
+      { "label": "Ventures,", "href": "/#ventures" },
+      { "label": "Properties,", "href": "/properties" },
+      { "label": "Contact", "href": "/#contact" }
+    ],
+    "hero": {
+      "kicker": "Monument Solutions / Mapleton, Utah",
+      "title": "Brody Billings",
+      "subtitle": "Entrepreneur, investor, and systems builder helping founder-led companies find the constraint and build the system around it.",
+      "scriptNote": "Builder before advisor.",
+      "scriptText": "I build, invest in, and improve businesses with operating discipline, capital clarity, and practical systems.",
+      "locationLabel": "Mapleton, UT",
+      "coords": "40.1305 N"
+    },
+    "stats": [
+      { "value": "20+", "label": "years building" },
+      { "value": "13", "label": "businesses across the portfolio" },
+      { "value": "250", "label": "employees before sale" },
+      { "value": "UT", "label": "Mapleton-based builder" }
+    ],
+    "focusAreas": [
+      {
+        "title": "Operations",
+        "text": "I organize the moving parts so owners can see where time, service, reporting, and accountability are leaking."
+      },
+      {
+        "title": "Finance",
+        "text": "Capital efficiency, cash flow clarity, and financial analysis that support better operating decisions."
+      },
+      {
+        "title": "AI Execution",
+        "text": "Practical AI for calls, intake, onboarding, scheduling, customer engagement, and decision support."
+      },
+      {
+        "title": "Strategy",
+        "text": "Business coaching, marketing consulting, process improvement, and executive-level operating clarity."
+      }
+    ],
+    "about": {
+      "titleLines": ["Entrepreneur.", "Investor.", "Systems builder."],
+      "body": "I am an entrepreneur and investor from Mapleton, Utah, with more than two decades of experience across import, distribution, consulting, retail, restaurants, real estate, and technology.",
+      "script": "Build the system."
+    },
+    "method": {
+      "titleLines": ["Operational", "Intelligence"],
+      "intro": "Monument Solutions helps organizations understand what is actually preventing growth before recommending technology, hiring, or process change.",
+      "steps": [
+        {
+          "eyebrow": "Visibility",
+          "title": "Find the real constraint.",
+          "text": "The audit starts with leadership, communication, systems, customer experience, and culture before recommending software or spend."
+        },
+        {
+          "eyebrow": "Intelligence",
+          "title": "Turn symptoms into signal.",
+          "text": "Financial analysis, risk management, and operational review clarify what is actually preventing growth."
+        },
+        {
+          "eyebrow": "Action",
+          "title": "Build the operating moves.",
+          "text": "The diagnosis becomes practical changes that improve accountability, cash flow, execution, and team communication."
+        },
+        {
+          "eyebrow": "Hermes",
+          "title": "Embed AI into the workflow.",
+          "text": "Automation is deployed inside the real business process so AI becomes an accelerator instead of an experiment."
+        }
+      ],
+      "quote": "Technology can accelerate progress, but people create it. If leadership, communication, and accountability improve, AI becomes much more valuable."
+    },
+    "offers": {
+      "heading": "Scaling founder-led businesses through smart automation, strategic outsourcing, capital efficiency, and AI-powered innovation.",
+      "items": [
+        {
+          "number": "01",
+          "title": "Finance",
+          "shape": "ledger",
+          "text": "Help founder-led companies use capital more efficiently so they can scale without burning cash or taking unnecessary risk."
+        },
+        {
+          "number": "02",
+          "title": "Strategy",
+          "shape": "compass",
+          "text": "Support business strategy, marketing decisions, process improvement, and executive operating clarity."
+        },
+        {
+          "number": "03",
+          "title": "AI",
+          "shape": "network",
+          "text": "Explore practical AI use cases for customer engagement, call centers, automation, decision-making, and lower overhead."
+        },
+        {
+          "number": "04",
+          "title": "Automation",
+          "shape": "flow",
+          "text": "Automate sales, marketing, customer service, and repetitive workflows so the team stays focused on revenue-producing work."
+        }
+      ]
+    },
+    "portfolio": {
+      "titleLines": ["My Portfolio", "and Operating Work."],
+      "intro": "The businesses, investments, and operating experience behind the way I think about systems, capital, customer service, and execution."
+    },
+    "properties": {
+      "heading": "Real Estate",
+      "intro": "Commercial, residential, and seller-financed properties shaped by market analysis, creative deal structure, and long-term operating value.",
+      "calloutScript": "Creative structure.",
+      "calloutText": "I look for opportunities where better structure, clearer operations, and flexible financing can help both sides reach a practical outcome."
+    },
+    "proof": {
+      "heading": "A practical builder with a people-first view of how businesses actually improve."
+    },
+    "footer": {
+      "heading": "Work with me.",
+      "text": "Answer a few questions about your operation. If an audit is the right next step, we will follow up within one business day."
+    }
+  }
+}

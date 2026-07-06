@@ -1,0 +1,60 @@
+{
+  "profiles": [
+    {
+      "slug": "audit",
+      "name": "Audit",
+      "company": null,
+      "welcome": "You were invited to see if your business qualifies for an operational audit.",
+      "headline": null,
+      "subheadline": "Most companies don't have a software problem — they have a visibility problem. Answer a few questions and find out where yours is.",
+      "ctaLabel": "Apply for an Audit",
+      "ventureGroupIds": null,
+      "showProperties": false,
+      "testimonialIds": null,
+      "ghlTags": ["source-audit-page"],
+      "hidden": false
+    },
+    {
+      "slug": "bruce",
+      "name": "Bruce",
+      "company": null,
+      "welcome": "Welcome back, Bruce. This workspace was prepared for you.",
+      "headline": null,
+      "subheadline": "Here are the services we discussed, and a quick way to move the next step forward when you're ready.",
+      "ctaLabel": null,
+      "ventureGroupIds": null,
+      "showProperties": true,
+      "testimonialIds": null,
+      "ghlTags": ["profile-bruce", "personalized-page-visited"],
+      "hidden": false
+    },
+    {
+      "slug": "chris",
+      "name": "Chris",
+      "company": null,
+      "welcome": "Welcome back, Chris. This page was prepared for you.",
+      "headline": null,
+      "subheadline": "A quick overview of the work we discussed, plus a direct line when you're ready to continue the conversation.",
+      "ctaLabel": null,
+      "ventureGroupIds": null,
+      "showProperties": false,
+      "testimonialIds": null,
+      "ghlTags": ["profile-chris", "personalized-page-visited"],
+      "hidden": false
+    },
+    {
+      "slug": "peak",
+      "name": "Arctic Peaks",
+      "company": "Arctic Peaks Water",
+      "welcome": "Prepared for the Arctic Peaks team.",
+      "headline": null,
+      "subheadline": "Operational systems, distribution clarity, and AI execution for water technology — the same playbook applied to Arctic Peaks.",
+      "ctaLabel": null,
+      "ventureGroupIds": ["current-companies"],
+      "showProperties": false,
+      "testimonialIds": null,
+      "ghlTags": ["profile-peak", "personalized-page-visited"],
+      "hidden": false
+    }
+  ]
+}

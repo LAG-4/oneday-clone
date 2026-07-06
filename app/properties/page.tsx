@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import type { ReactNode } from "react";
-import { propertyListings } from "../property-listings";
+import { PropertiesExplorer } from "../components/properties-explorer";
+import { getProperties, getSiteContent } from "../lib/content";
 
-const brodyAsset = (name: string) => `/brody/assets/${name}`;
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Properties | Brody Billings",
@@ -11,40 +11,12 @@ export const metadata: Metadata = {
     "Commercial, residential, seller-financed, and investment property listings connected to Brody Billings.",
 };
 
-function ActionLink({
-  children,
-  href,
-  variant = "base",
-}: {
-  children: ReactNode;
-  href: string;
-  variant?: "base" | "dark" | "outline";
-}) {
-  const content = (
-    <>
-      <span className="action-button__bg" />
-      <span className="action-button__inner">
-        <span className="action-button__text">{children}</span>
-      </span>
-    </>
-  );
+export default async function PropertiesPage() {
+  const [properties, { settings }] = await Promise.all([
+    getProperties(),
+    getSiteContent(),
+  ]);
 
-  if (href.startsWith("/")) {
-    return (
-      <Link className={`action-button action-button--${variant}`} href={href}>
-        {content}
-      </Link>
-    );
-  }
-
-  return (
-    <a className={`action-button action-button--${variant}`} href={href}>
-      {content}
-    </a>
-  );
-}
-
-export default function PropertiesPage() {
   return (
     <main className="site-shell listing-page">
       <header className="listing-nav section-inner">
@@ -52,7 +24,7 @@ export default function PropertiesPage() {
           <img
             alt="Brody Billings"
             className="brody-logo"
-            src={brodyAsset("logo.png")}
+            src="/brody/assets/logo.png"
           />
         </Link>
         <nav aria-label="Properties navigation">
@@ -77,66 +49,36 @@ export default function PropertiesPage() {
         <div>
           <p>
             Browse commercial, residential, seller-financed, and investment
-            property opportunities. Addresses, pricing, images, and sale terms
-            can be added as the final inventory is confirmed.
+            property opportunities. Ask about any listing and the details go
+            straight to Brody.
           </p>
-          <ActionLink href="mailto:brody@monument.solutions" variant="outline">
-            Ask about a property
-          </ActionLink>
         </div>
       </section>
 
-      <section className="listing-section section-inner" aria-labelledby="listings-title">
+      <section
+        className="listing-section section-inner"
+        aria-labelledby="listings-title"
+      >
         <div className="section-kicker">
           <span>Inventory</span>
-          <span>{propertyListings.length} property opportunities</span>
+          <span>{properties.length} property opportunities</span>
         </div>
         <h2 id="listings-title">All Listings</h2>
 
-        <div className="listing-grid">
-          {propertyListings.map((property, index) => (
-            <article className="listing-card" key={property.title}>
-              <div className="listing-card__top">
-                <span className="mono">{String(index + 1).padStart(2, "0")}</span>
-                <span>{property.category}</span>
-              </div>
-              <div className="listing-card__main">
-                <h3>{property.title}</h3>
-                <p>{property.summary}</p>
-              </div>
-              <dl>
-                <div>
-                  <dt>Status</dt>
-                  <dd>{property.status}</dd>
-                </div>
-                <div>
-                  <dt>Location</dt>
-                  <dd>{property.location}</dd>
-                </div>
-                <div>
-                  <dt>Price</dt>
-                  <dd>{property.price}</dd>
-                </div>
-              </dl>
-              <ul>
-                {property.details.map((detail) => (
-                  <li key={detail}>{detail}</li>
-                ))}
-              </ul>
-            </article>
-          ))}
-        </div>
+        <PropertiesExplorer properties={properties} />
       </section>
 
       <section className="listing-cta section-inner">
         <span className="script-note">Next step.</span>
         <p>
-          Add the final property packet here: addresses, photos, prices, parcel
-          details, financing terms, status, and inquiry routing.
+          Want details on something that is not listed yet? Email{" "}
+          <a href={`mailto:${settings.contactEmail}`}>{settings.contactEmail}</a>{" "}
+          and mention the property.
         </p>
-        <ActionLink href="/" variant="dark">
-          Back to main site
-        </ActionLink>
+        <Link className="text-draw" href="/">
+          <span>Back to main site</span>
+          <span className="text-draw__line" aria-hidden="true" />
+        </Link>
       </section>
     </main>
   );

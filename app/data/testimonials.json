@@ -1,0 +1,20 @@
+{
+  "testimonials": [
+    {
+      "id": "massimo-sahin",
+      "quote": "Brody is a rigorous businessman and a genuine, caring partner who builds lasting systems and value for his associates.",
+      "name": "Massimo Sahin",
+      "image": "massimo.jpeg",
+      "hidden": false,
+      "order": 10
+    },
+    {
+      "id": "trent-scott",
+      "quote": "Monument Solutions' structured alignment guided us through a seamless operational scaling transition.",
+      "name": "Trent Scott",
+      "image": "trent.png",
+      "hidden": false,
+      "order": 20
+    }
+  ]
+}
