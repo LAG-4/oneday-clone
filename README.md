@@ -85,18 +85,19 @@ custom value is missing or invalid, so a bad edit can never blank the site.
 - [x] End-to-end lead test: contact created with correct tags
       (`audit-t1`, `fit-qualified`, `interested-in-audit`, …) and 17
       populated fields, then deleted.
+- [x] `Audit Pipeline` created in GHL with stages New Application →
+      Qualified - Needs Review → Booking Sent → Audit Booked (Deposit Paid)
+      → Audit Delivered → Implementation Proposal → Won. `GHL_PIPELINE_ID`
+      and `GHL_PIPELINE_STAGE_ID` are set locally and in Vercel production +
+      preview, so qualified submissions create Opportunities automatically.
+- [x] Production smoke test after pipeline wiring: qualified test submission
+      created a contact and an `Audit Pipeline` Opportunity in the first
+      stage, then both test records were deleted.
 
 ## Remaining GHL setup (manual, in the GHL app)
 
-These cannot be created by API — do them in the GHL UI (step-by-step):
+Do these in the GHL UI unless we intentionally script more setup later:
 
-- [ ] **Audit Pipeline** (Opportunities → Pipelines → Create): stages
-      New Application → Qualified–Needs Review → Booking Sent → Audit Booked
-      (Deposit Paid) → Audit Delivered → Implementation Proposal → Won.
-      Then copy the pipeline id + first-stage id into `GHL_PIPELINE_ID` /
-      `GHL_PIPELINE_STAGE_ID` (Vercel env) — the site then creates
-      Opportunities itself (T1 $3,000 / T2 $5,000 / T3 custom) for qualified
-      leads; no workflow step needed for it.
 - [ ] **Property Pipeline** (optional but recommended): New Inquiry →
       Details Sent → Negotiation → Under Contract → Closed, fed by a small
       workflow on tag `property-inquiry`.
